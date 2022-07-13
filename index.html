@@ -147,16 +147,21 @@
 			<span style="font-size:22px">Department of Computer Science, Reichman University, Israel</span>
 			<br>
 			<br>
-			<table align=center width=250px>
+			<table align=center width=550px>
 				<tr>
-					<td align=center width=120px>
+					<td align=center width=200px>
 						<center>
-							<span style="font-size:24px"><a href='https://arxiv.org/abs/2203.15065'>[Paper]</a></span>
+							<span style="font-size:24px"><a href='https://arxiv.org/abs/2203.15065'>Paper [ECCV 2022]</a></span>
 						</center>
 					</td>
-					<td align=center width=120px>
+					<td align=center width=150px>
 						<center>
-							<span style="font-size:24px"><a href='https://github.com/asafkar/geometry_learn'>[GitHub]</a></span><br>
+							<span style="font-size:24px"><a href='https://github.com/asafkar/deep_shadow'>Code</a></span><br>
+						</center>
+					</td>
+					<td align=center width=150px>
+						<center>
+							<span style="font-size:24px"><a href='https://github.com/asafkar/deep_shadow'>Data</a></span><br>
 						</center>
 					</td>
 				</tr>
@@ -223,69 +228,61 @@
 
 	<hr>
 	<center><h1>Method</h1></center>
+	<center><h3>Algorithm Overview</h3></center>
 	<tr>
 		<td width=260px>
 			<center>
-				<img class="round" style="width:500px" src="./resources/shape_from_shadow_method.png"/>
+				<img class="round" style="width:700px" src="./resources/algo_overview.svg"/>
 			</center>
 		</td>
 	</tr>
+	<br>
+	<br>
+	<!-- <div class="line"></div> -->
+	<center>
+		
+	<br>DeepShadow takes the light source location \(L^j\) and pixel coordinates \(({u, v)}\) as inputs, along with the
+	<br> estimated depth \(\hat{d}\) from the MLP, and outputs an estimate of the shadow map \(\hat{S^j}\) at each pixel location.
+	<br>The ground-truth shadow map \(S^j\) is then used as a supervision to optimize the learned depth map.<br>
+		
+	</center>
 	<div class="line"></div>
-
+	<br>
+	<br>
+	<center><h3>Flow of our Method</h3></center>
 	<tr>
 		<td width=260px>
 			<center>
-				<img class="round" style="width:500px" src="./resources/shape_from_shadow_method_details.png"/>
+				<img class="round" style="width:700px" src="./resources/algo_flow.svg"/>
 			</center>
 		</td>
 	</tr>
+
 	<table align=center width=800px>
 		<tr>
 			<center>
-				<!-- \begin{align} -->
+				<br>Left - The light source \(L^j\) is projected onto the image plane to receive \(\boldsymbol\ell^j\). A ray \(\mathbf{r}_i^j\) of \((u,v)\) points is created
+				<br> between \(\boldsymbol\ell^j\) and \(\mathbf{u}_i\). Then, each point with its estimated depth \(\hat{d}\) is unprojected to world coordinates.
+				<br>
+				<br>Right - The shadow line scan algorithm is used on points in 3D space to calculate shadowed pixels. 
+				<br>Red points are shadowed, since their angle to the light source is smaller than \(\alpha\).
 
-				<p>
-					Top:
-					DeepShadow takes the light source location \(L^j\) and pixel coordinates \(({u, v)}\) as inputs, along with the
-					<br> estimated depth \(\hat{d}\) from the MLP, and outputs an estimate of the shadow map \(\hat{S^j}\) at each pixel location.
-					<br>The ground-truth shadow map \(S^j\) is then used as a supervision to optimize the learned depth map.<br>
-					Bottom: 
-					Left - The light source \(L^j\) is projected onto the image plane to receive \(\boldsymbol\ell^j\). A ray \(\mathbf{r}_i^j\) of \((u,v)\) points is created
-					<br> between \(\boldsymbol\ell^j\) and \(\mathbf{u}_i\). Then, each point with its estimated depth \(\hat{d}\) is unprojected to world coordinates.
-					<br> Right - The shadow line scan algorithm is used on points in 3D space to calculate shadowed pixels. Red points are shadowed, 
-					<br>since their angle to the light source is smaller than \(\alpha\).
-
-					<br>
-
-				</p>
-				<!-- \end{align} -->
-
+				<br>
 			</center>
 		</tr>
 	</table>
-	<hr>
+	<!-- <hr> -->
 
-	<center><h1>Data and Code</h1></center>
-
-	<table align=center width=420px>
-		<center>
-			<tr>
-				<td>
-				</td>
-			</tr>
-		</center>
-	</table>
+	<!-- <center><h1>Data and Code</h1></center>
 
 	<table align=center width=850px>
 		<center>
-			<tr>
 				<td>
 					We provide our code, datasets and rendering code below.
 				</td>
-			</tr>
 		</center>
 	</table>
-	<table align=center width=450px>
+	<table align=center width=850px>
 		<tr>
 			<td align=center width=120px>
 				<center>
@@ -304,31 +301,75 @@
 			</td>
 		</tr>
 	</table>
-
+ -->
 
 
 	<hr>
 	<br>
 	<table align=center width=900px>
-		<tr>
+			<!-- <tr> -->
 			<center><h1>Results</h1></center>
+
+			<center><h3>Partial Input Shadows</h3></center>
+			<center>
+				<img class="round" style="width:90px" src="./resources/shadows/relief_shadow1.png"/>
+				&nbsp&nbsp&nbsp 
+				<img class="round" style="width:90px" src="./resources/shadows/sculp_shadow1.png"/>
+				&nbsp&nbsp&nbsp
+				<img class="round" style="width:90px" src="./resources/shadows/cactus_shadow1.png"/>
+				&nbsp&nbsp&nbsp
+				<img class="round" style="width:90px" src="./resources/shadows/sine_surface_shadow1.png"/>
+				&nbsp&nbsp&nbsp
+				<img class="round" style="width:90px" src="./resources/shadows/bread_shadow1.png"/>
+				&nbsp&nbsp&nbsp
+				<img class="round" style="width:90px" src="./resources/shadows/rose_shadow1.png"/>
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				<br>
+				<img class="round" style="width:90px" src="./resources/shadows/relief_shadow2.png"/>
+				&nbsp&nbsp&nbsp 
+				<img class="round" style="width:90px" src="./resources/shadows/sculp_shadow2.png"/>
+				&nbsp&nbsp&nbsp
+				<img class="round" style="width:90px" src="./resources/shadows/cactus_shadow2.png"/>
+				&nbsp&nbsp&nbsp
+				<img class="round" style="width:90px" src="./resources/shadows/sine_surface_shadow2.png"/>
+				&nbsp&nbsp&nbsp
+				<img class="round" style="width:90px" src="./resources/shadows/bread_shadow2.png"/>
+				&nbsp&nbsp&nbsp
+				<img class="round" style="width:90px" src="./resources/shadows/rose_shadow2.png"/>
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			</center>
+
+			<center><h3>Depth Estimations</h3></center>
+				<center>
+					<img class="round" style="width:700px" src="./resources/depth_ours.png"/>
+				</center>
+			<center><h3>Surface Normals Estimations</h3></center>
+				<center>
+					<img class="round" style="width:700px" src="./resources/normal_ours.png"/>
+				</center>
+			<br>
+		
+			
+			<center><h3>3D Reconstruction</h3></center>
+			<center>
 			<div class="row">
-					<div class="column">
-					<model-viewer alt="GT Rose"
-					style="width: 80%; height: 80%; top: 0px;  position: left; background-color: rgb(255, 255, 255);"
+					<div class="column"> 
+					<model-viewer alt="GT Rose" camera-controls camera-orbit="0deg 90deg 1m"
+					style="width: 50%; height: 50%; top: 0px;  position: left; background-color: rgb(255, 255, 255);"
 					src="rose_mesh_gt.glb" ar ar-modes="webxr scene-viewer quick-look" 
 					seamless-poster shadow-intensity="1" camera-controls enable-pan>
 					</model-viewer>	
 					</div>			
 					
 					<div class="column">
-					<model-viewer alt="recovered Rose" 
-					style="width: 80%; height: 80%; top: 0px;  position: right; background-color: rgb(255, 255, 255);"
+					<model-viewer alt="recovered Rose" camera-controls camera-orbit="0deg 90deg 1m"
+					style="width: 50%; height: 50%; top: 0px;  position: right; background-color: rgb(255, 255, 255);"
 					src="rose_mesh.glb" ar ar-modes="webxr scene-viewer quick-look" 
 					seamless-poster shadow-intensity="1" camera-controls enable-pan>
 					</model-viewer>		
 					</div>		
 			</div>
+		</center>
 		</tr>
 	</table>
 
